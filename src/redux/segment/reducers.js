@@ -1,5 +1,6 @@
 const initialState = {
   segment_elements: [],
+  graph_tokens: [],
 };
 
 const segmentReducer = (state = initialState, action) => {
@@ -8,6 +9,11 @@ const segmentReducer = (state = initialState, action) => {
       return {
         ...state,
         segment_elements: action.payload,
+      };
+    case "SET_GRAPH_TOKENS":
+      return {
+        ...state,
+        graph_tokens: action.payload,
       };
     default:
       return state;

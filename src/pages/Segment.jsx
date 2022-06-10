@@ -1,8 +1,10 @@
+import axios from 'axios';
 import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { saveSegment } from "../redux/segment/actions";
+import { saveSegment, setGraphTokens } from "../redux/segment/actions";
+import List from './List';
 
 const StyledWrapper = styled.div`
   text-align: center;
@@ -38,9 +40,27 @@ const StyledButtonsWrapper = styled.div`
   justify-content: space-around;
 `;
 const Segment = () => {
+  const dispatch = useDispatch();
+  const [tokens, setTokens] = useState([]);
   const [segmentQuery, setSegmentQuery] = useState([{ contract_address: "" }]);
 
-  const dispatch = useDispatch();
+  const handleFetchGQL = async (contract_address) => {
+    try {
+      const payload = `{\n  tokens(where: {\n    collection: \"${contract_address}\",\n  }) {\n    owner {\n      id\n    }\n  }\n}`;
+      const data = await axios.post(
+        `https://gateway.thegraph.com/api/2d3d83f6c8345633d0dce29d41068a6b/subgraphs/id/B333F7Ra4kuVBSwHFDfH9x9N1341GYHvdfpV94KY8Gmv`,
+        { query: payload }
+      );
+
+      console.log('res: ', data?.data?.data?.tokens);
+
+      setGraphTokens(data?.data?.data?.tokens);
+      setTokens(data?.data?.data?.tokens);
+    } catch (err) {
+      console.error('Graph [error]: ', err);
+    }
+  }
+
 
   const handleAddSegment = () => {
     setSegmentQuery([...segmentQuery, { contract_address: "" }]);
@@ -61,6 +81,7 @@ const Segment = () => {
 
   const handleSubmit = () => {
     dispatch(saveSegment(segmentQuery));
+    handleFetchGQL(segmentQuery[0].contract_address);
   };
 
   return (
@@ -110,6 +131,7 @@ const Segment = () => {
           SEND
         </StyledButton>
       </StyledButtonsWrapper>
+      <List tokens={tokens} />
     </StyledWrapper>
   );
 };

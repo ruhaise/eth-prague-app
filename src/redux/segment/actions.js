@@ -4,3 +4,10 @@ export const saveSegment = (payload) => {
     payload,
   };
 };
+
+export const setGraphTokens = (payload) => {
+  return {
+    type: "SET_GRAPH_TOKENS",
+    payload,
+  };
+};
