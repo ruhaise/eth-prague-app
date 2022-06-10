@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
-import { walletConnect } from '../redux/blockchain/actions';
+import React from "react";
+import Header from '../components/Header';
 
 const Home = () => {
-  useEffect(() => {
-    dispatch(walletConnect());
-  }, []);
-
   return (
-    <>Here will be our app</>
+    <div>
+      <Header />
+    </div>
   );
 }
 
