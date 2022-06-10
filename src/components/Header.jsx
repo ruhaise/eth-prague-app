@@ -20,7 +20,7 @@ const ConnectWallet = () => {
 
 const Header = ({ title }) => {
   return (
-    <StyledHeader>
+    <StyledHeader position="sticky" >
       <Toolbar>
         <Typography variant="h6" component="h1">{title}</Typography>
         <ConnectWallet />
