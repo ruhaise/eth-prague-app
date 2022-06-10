@@ -2,21 +2,21 @@ import { AppBar, Toolbar } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import ConnectWallet from './ConnectWallet';
+import SelectNetwork from './SelectNetwork';
 
 const StyledHeader = styled(AppBar)`
   background-color: #000;
   font-family: 'Roboto', sans-serif;
   font-style: normal;
 
-  div {
+  > div {
     background-color: #000;
     display: flex;
     width: 100%;
-    justify-content: flex-start;
+    justify-content: space-between;
 
     div {
       display: flex;
-      gap: 32px;
 
       a {
         color: #FFFFFF;
@@ -32,17 +32,30 @@ const StyledHeader = styled(AppBar)`
   }
 `
 
+const StyledLeftBlock = styled.div`
+  justify-content: flex-start;
+  gap: 32px;
+`;
+
+const StyledRightBlock = styled.div`
+  justify-content: flex-end;
+  gap: 5px;
+`;
+
 const Header = () => {
   return (
     <StyledHeader position="sticky">
       <Toolbar>
-        <div>
+        <StyledLeftBlock>
           <Link to="/">Home</Link>
           <Link to="/segments">Manage segments</Link>
           <Link to="/list">List</Link>
           <Link to="/chat">Chat</Link>
-        </div>
-        <ConnectWallet />
+        </StyledLeftBlock>
+        <StyledRightBlock>
+          <SelectNetwork />
+          <ConnectWallet />
+        </StyledRightBlock>
       </Toolbar>
     </StyledHeader>
   );
