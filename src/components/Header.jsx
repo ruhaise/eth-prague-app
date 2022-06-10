@@ -1,28 +1,47 @@
-import { AppBar, Toolbar, Typography, makeStyles } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
+import { AppBar, Toolbar } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
-import { walletConnect } from '../redux/blockchain/actions';
+import ConnectWallet from './ConnectWallet';
 
 const StyledHeader = styled(AppBar)`
-  backgroundColor: "#400CCC",
+  background-color: #000;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+
+  div {
+    background-color: #000;
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+
+    div {
+      display: flex;
+      gap: 32px;
+
+      a {
+        color: #FFFFFF;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 16px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+  }
 `
 
-const ConnectWallet = () => {
-  const dispatch = useDispatch();
-  const walletAddress = useSelector(state => state.blockchain.account);
-
-  if (!walletAddress) {
-    return <button onClick={() => dispatch(walletConnect())}>Connect Wallet</button>
-  }
-
-  return <span>{walletAddress}</span>;
-};
-
-const Header = ({ title }) => {
+const Header = () => {
   return (
-    <StyledHeader position="sticky" >
+    <StyledHeader position="sticky">
       <Toolbar>
-        <Typography variant="h6" component="h1">{title}</Typography>
+        <div>
+          <Link to="/">Home</Link>
+          <Link to="/segments">Manage segments</Link>
+          <Link to="/list">List</Link>
+          <Link to="/chat">Chat</Link>
+        </div>
         <ConnectWallet />
       </Toolbar>
     </StyledHeader>

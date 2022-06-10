@@ -12,7 +12,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route exact path="/segment" element={<Segment/>} />
+        <Route exact path="/segments" element={<Segment/>} />
         <Route exact path="/gql" element={<GQL/>}/>
         <Route exact path="/list" element={<List/>}/>
         <Route exact path="/chat" element={<Chat/>}/>
