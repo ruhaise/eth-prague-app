@@ -1,5 +1,11 @@
+import { AppBar, Toolbar, Typography, makeStyles } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
+import styled from 'styled-components';
 import { walletConnect } from '../redux/blockchain/actions';
+
+const StyledHeader = styled(AppBar)`
+  backgroundColor: "#400CCC",
+`
 
 const ConnectWallet = () => {
   const dispatch = useDispatch();
@@ -14,10 +20,12 @@ const ConnectWallet = () => {
 
 const Header = ({ title }) => {
   return (
-    <div>
-      <span>{title}</span>
-      <ConnectWallet />
-    </div>
+    <StyledHeader>
+      <Toolbar>
+        <Typography variant="h6" component="h1">{title}</Typography>
+        <ConnectWallet />
+      </Toolbar>
+    </StyledHeader>
   );
 };
 
