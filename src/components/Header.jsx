@@ -27,6 +27,15 @@ const StyledHeader = styled(AppBar)`
         text-align: center;
         text-decoration: none;
         cursor: pointer;
+
+        @media screen and (max-width: 700px) {
+          display: none;
+        }
+
+        &:hover {
+          transition: .2s;
+          text-decoration: overline;
+        }
       }
     }
   }
