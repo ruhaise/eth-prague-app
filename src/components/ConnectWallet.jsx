@@ -49,7 +49,7 @@ const ConnectWallet = () => {
   };
 
   console.log("walletAddress", walletAddress);
-
+  //remove test
   if (!walletAddress) {
     return (
       <StyledButton onClick={() => handleLogin()}>Connect Wallet</StyledButton>
