@@ -1,7 +1,7 @@
 {
-  "name": "eth-prague-hackaton-app",
+  "name": "eth-prague-hackathon-app",
   "version": "1.0.0",
-  "description": "ETH Prague hackaton app",
+  "description": "ETH Prague hackathon app",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.4",

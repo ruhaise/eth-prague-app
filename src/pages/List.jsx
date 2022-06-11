@@ -2,16 +2,34 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 10px;
   justify-content: flex-start;
 
-  span {
-    margin-top: 5px;
+  div {
+    display: grid;
+    font-size: 20px;
+    padding: 0 15px;
+    line-height: 36px;
+    max-width: 530px;
+    width: 80%;
+    grid-template-columns: 1fr auto;
 
-    &:first-child {
-      margin-top: 40px; 
+    span:first-child {
+      justify-self: start;
+      color: #B1B1B1;
+      font-weight: 700;
+    }
+
+    span:last-child {
+      cursor: pointer;
+    }
+
+    &:hover {
+      background-color:rgba(255, 255, 255, 0.7);
+      border-radius: 6px;
     }
   }
 `
@@ -19,7 +37,12 @@ const StyledContainer = styled.div`
 const List = ({tokens}) => {
   return (
     <StyledContainer>
-      {tokens?.map(token => <span>{token.owner.id}</span>)}
+      {tokens?.map((token, index) => (
+        <div key={token.owner.id}>
+          <span>{index}</span>
+          <span>{token.owner.id}</span>
+        </div>
+      ))}
     </StyledContainer>
   );
 }

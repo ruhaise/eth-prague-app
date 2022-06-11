@@ -32,9 +32,18 @@ const StyledHeader = styled(AppBar)`
           display: none;
         }
 
-        &:hover {
-          transition: .2s;
-          text-decoration: overline;
+        &:after {
+          content: '';
+          display: block;
+          width: 0;
+          height: 2px;
+          background: #5D5FEF;
+          transition: width .2s;
+          margin-top: 2px;
+        }
+      
+        &:hover::after {
+          width: 100%;
         }
       }
     }
@@ -58,8 +67,6 @@ const Header = () => {
         <StyledLeftBlock>
           <Link to="/">Home</Link>
           <Link to="/segments">Manage segments</Link>
-          <Link to="/list">List</Link>
-          <Link to="/chat">Chat</Link>
         </StyledLeftBlock>
         <StyledRightBlock>
           <SelectNetwork />

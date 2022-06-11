@@ -1,4 +1,4 @@
-#  ETH Prague hackaton app
+#  ETH Prague hackathon app
    
 See an app at `https://bi4uak1fq34x.usemoralis.com`   
    

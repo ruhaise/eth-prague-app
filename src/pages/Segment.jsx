@@ -7,16 +7,24 @@ import { saveSegment, setGraphTokens } from "../redux/segment/actions";
 import List from './List';
 
 const StyledWrapper = styled.div`
+  background: #F0F0F0;
   text-align: center;
-  padding: 24px;
+  display: flex;
 `;
 
 const StyledInputsWrapper = styled.div`
-  width: 90%;
   margin: auto;
   max-width: 500px;
   display: flex;
   margin-bottom: 15px;
+
+  &:first-child > div:last-child {
+    display:none
+  }
+
+  &:not(:first-child) > div:first-child {
+    width: 80%;
+  }
 `;
 const StyledInputsRemove = styled.div`
   width: 40px;
@@ -24,21 +32,88 @@ const StyledInputsRemove = styled.div`
   margin-left: 10px;
 `;
 
-const StyledButton = styled(Button)`
-  width: 200px;
+const StyledButtonAdd = styled(Button)`
+  border: 3px dashed #C4C4C4  !important;
+  border-radius: 16px  !important;
+  background: transparent !important;
+  outline: none  !important;
+  box-shadow: none !important;
+  color: #B1B1B1  !important;
+  display: flex  !important;
+  justify-content: space-between  !important;
+  width: 100%  !important;
+  align-items: center !important;
+  padding: 12px 15px !important;
+  cursor: pointer !important;
+  margin-bottom: 25px !important;
 `;
+
+const StyledButtonSend = styled(Button)`
+  background: #5D5FEF !important;
+  border-radius: 8px !important;
+  width: 100% !important;
+  height: 58px !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+
+  span {
+    font-size: 14px !important;
+
+    &:last-child {
+      margin-left: 13px !important;
+    }
+  }
+`;
+
+const StyledAddIcon = styled.img`
+`;
+
+const StyledSearchIcon = styled.img`
+`;
+
+
 
 const StyledInputsoutWrapp = styled.div`
   margin-bottom: 30px;
 `;
 
 const StyledButtonsWrapper = styled.div`
-  width: 90%;
   margin: auto;
   max-width: 500px;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 `;
+
+const StyledLeftContainer = styled.div`
+  width: 35vw;
+`;
+
+const StyledRightContainer = styled.div`
+  width: 65vw;
+`;
+
+const StyledImage = styled.img`
+  width: 100%;
+`;
+
+const StyledInputsImage = styled.img`
+  width: 35%;
+  margin-top: 50px;
+  margin-bottom: 30px;
+`
+
+const StyledBR = styled.div`
+  background: #D0D0D0;
+  height: 1px;
+  margin-bottom: 42px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  width: 90%;
+`
+
 const Segment = () => {
   const dispatch = useDispatch();
   const [tokens, setTokens] = useState([]);
@@ -86,52 +161,61 @@ const Segment = () => {
 
   return (
     <StyledWrapper>
-      <StyledInputsoutWrapp>
-        {segmentQuery.map((segment, index) => {
-          return (
-            <StyledInputsWrapper key={index}>
-              {" "}
-              <TextField
-                required
-                label="Contract address"
-                name="contract_address"
-                defaultValue="contract address"
-                value={segment.contract_address}
-                onChange={(e) => handleSegmentChange(index, e)}
-                fullWidth
-              />
-              <StyledInputsRemove>
-                {index > 0 && (
-                  <Button
-                    variant="outlined"
-                    size="medium"
-                    onClick={() => handleRemoveSegment(index)}
-                    color="primary"
-                  >
-                    Remove
-                  </Button>
-                )}
-              </StyledInputsRemove>
-            </StyledInputsWrapper>
-          );
-        })}
-      </StyledInputsoutWrapp>
-      <StyledButtonsWrapper>
-        <StyledButton
-          onClick={handleAddSegment}
-          disabled={segmentQuery.length > 4}
-          color="primary"
-          variant="contained"
-          size="large"
-        >
-          Add +
-        </StyledButton>
+      <StyledLeftContainer>
+        <StyledImage src={require('../assets/images/SegmentBlocks.png').default}/>
+      </StyledLeftContainer>
+      <StyledRightContainer>
+        <StyledInputsImage src={require('../assets/images/CreateYourSegment.png').default}/>
+        <StyledInputsoutWrapp>
+          {segmentQuery.map((segment, index) => {
+            return (
+              <StyledInputsWrapper key={index}>
+                {" "}
+                <TextField
+                  required
+                  label="Contract address"
+                  name="contract_address"
+                  defaultValue="contract address"
+                  value={segment.contract_address}
+                  onChange={(e) => handleSegmentChange(index, e)}
+                  fullWidth
+                />
+                <StyledInputsRemove>
+                  {index > 0 && (
+                    <Button
+                      variant="outlined"
+                      size="medium"
+                      onClick={() => handleRemoveSegment(index)}
+                      color="primary"
+                    >
+                      Remove
+                    </Button>
+                  )}
+                </StyledInputsRemove>
+              </StyledInputsWrapper>
+            );
+          })}
+        </StyledInputsoutWrapp>
+        <StyledButtonsWrapper>
+          <StyledButtonAdd
+            onClick={handleAddSegment}
+            disabled={segmentQuery.length > 4}
+            color="primary"
+            variant="contained"
+            size="large"
+          >
+            <span>Add more segment blocks</span>
+            <StyledAddIcon src={require('../assets/images/AddIcon.svg').default}/>
+          </StyledButtonAdd>
 
-        <StyledButton onClick={handleSubmit} size="large" variant="contained">
-          SEND
-        </StyledButton>
-      </StyledButtonsWrapper>
-      <List tokens={tokens} />
+          <StyledButtonSend onClick={handleSubmit} size="large" variant="contained">
+            <StyledSearchIcon src={require('../assets/images/SearchIcon.svg').default}/>
+            <span>Search wallet addresses that match this segment</span>
+          </StyledButtonSend>
+        </StyledButtonsWrapper>
+        {tokens?.length ? <StyledBR /> : null}
+        <List tokens={tokens} />
+      </StyledRightContainer>
     </StyledWrapper>
   );
 };
