@@ -4,10 +4,10 @@ import { formatWalletAddress } from "../utils/formatWalletAddress";
 
 const StyledButton = styled.button`
   align-items: center;
-  background: #000;
+  background: #ffffff;
   border-radius: 8px;
-  border: 1px solid #ffffff;
-  color: #fff;
+  border: 1px solid #000;
+  color: #000;
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -21,12 +21,12 @@ const StyledButton = styled.button`
   width: 146px;
 
   &:hover {
-    background: #333;
+    background: #4bb5c5;
     transition: 0.2s;
   }
 
   &:disabled {
-    background: #000;
+    background: #fff;
     cursor: default;
   }
 `;
@@ -49,7 +49,7 @@ const ConnectWallet = () => {
   };
 
   console.log("walletAddress", walletAddress);
-  //remove test
+
   if (!walletAddress) {
     return (
       <StyledButton onClick={() => handleLogin()}>Connect Wallet</StyledButton>

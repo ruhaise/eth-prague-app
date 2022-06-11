@@ -1,12 +1,12 @@
 import { AppBar, Toolbar } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import styled from 'styled-components';
-import ConnectWallet from './ConnectWallet';
-import SelectNetwork from './SelectNetwork';
+import styled from "styled-components";
+import ConnectWallet from "./ConnectWallet";
+import SelectNetwork from "./SelectNetwork";
 
 const StyledHeader = styled(AppBar)`
   background-color: #000;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
 
   > div {
@@ -19,7 +19,7 @@ const StyledHeader = styled(AppBar)`
       display: flex;
 
       a {
-        color: #FFFFFF;
+        color: #ffffff;
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
@@ -33,22 +33,22 @@ const StyledHeader = styled(AppBar)`
         }
 
         &:after {
-          content: '';
+          content: "";
           display: block;
           width: 0;
           height: 2px;
-          background: #5D5FEF;
-          transition: width .2s;
+          background: #5d5fef;
+          transition: width 0.2s;
           margin-top: 2px;
         }
-      
+
         &:hover::after {
           width: 100%;
         }
       }
     }
   }
-`
+`;
 
 const StyledLeftBlock = styled.div`
   justify-content: flex-start;
