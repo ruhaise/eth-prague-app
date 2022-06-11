@@ -46,7 +46,7 @@ const Segment = () => {
 
   const handleFetchGQL = async (contract_address) => {
     try {
-      const payload = `{\n  tokens(where: {\n    collection: \"${contract_address}\",\n  }) {\n    owner {\n      id\n    }\n  }\n}`;
+      const payload = `{\n  tokens(first: 999,where: {\n    collection: \"${contract_address}\",\n  }) {\n    owner {\n      id\n    }\n  }\n}`;
       const data = await axios.post(
         `https://gateway.thegraph.com/api/2d3d83f6c8345633d0dce29d41068a6b/subgraphs/id/B333F7Ra4kuVBSwHFDfH9x9N1341GYHvdfpV94KY8Gmv`,
         { query: payload }
