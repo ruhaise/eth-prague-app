@@ -66,7 +66,7 @@ const Header = () => {
       <Toolbar>
         <StyledLeftBlock>
           <Link to="/">Home</Link>
-          <Link to="/segments">Manage segments</Link>
+          <Link to="/segments">Create segments</Link>
         </StyledLeftBlock>
         <StyledRightBlock>
           <SelectNetwork />

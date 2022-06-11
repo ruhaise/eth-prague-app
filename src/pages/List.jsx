@@ -38,9 +38,9 @@ const List = ({tokens}) => {
   return (
     <StyledContainer>
       {tokens?.map((token, index) => (
-        <div key={token.owner.id}>
+        <div key={token}>
           <span>{index}</span>
-          <span>{token.owner.id}</span>
+          <span>{token}</span>
         </div>
       ))}
     </StyledContainer>
