@@ -1,18 +1,17 @@
-import { useDispatch, useSelector } from "react-redux";
-import styled from 'styled-components';
-import { walletConnect } from '../redux/blockchain/actions';
-import { formatWalletAddress } from '../utils/formatWalletAddress';
+import { useMoralis } from "react-moralis";
+import styled from "styled-components";
+import { formatWalletAddress } from "../utils/formatWalletAddress";
 
 const StyledButton = styled.button`
   align-items: center;
   background: #000;
   border-radius: 8px;
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
   color: #fff;
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -23,7 +22,7 @@ const StyledButton = styled.button`
 
   &:hover {
     background: #333;
-    transition: .2s;
+    transition: 0.2s;
   }
 
   &:disabled {
@@ -33,14 +32,35 @@ const StyledButton = styled.button`
 `;
 
 const ConnectWallet = () => {
-  const dispatch = useDispatch();
-  const walletAddress = useSelector(state => state.blockchain.account);
+  const { authenticate, isAuthenticated, user } = useMoralis();
+
+  const walletAddress = user?.get("ethAddress");
+
+  const handleLogin = async () => {
+    if (!isAuthenticated) {
+      await authenticate()
+        .then(function (user) {
+          console.log(user?.get("ethAddress"));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  };
+
+  console.log("walletAddress", walletAddress);
 
   if (!walletAddress) {
-    return <StyledButton onClick={() => dispatch(walletConnect())}>Connect Wallet</StyledButton>
+    return (
+      <StyledButton onClick={() => handleLogin()}>Connect Wallet</StyledButton>
+    );
   }
 
-  return <StyledButton disabled={true}>{formatWalletAddress(walletAddress)}</StyledButton>;
+  return (
+    <StyledButton disabled={true}>
+      {formatWalletAddress(walletAddress)}
+    </StyledButton>
+  );
 };
 
 export default ConnectWallet;

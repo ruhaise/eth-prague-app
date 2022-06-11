@@ -5,10 +5,16 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import "./styles/index.scss";
+import { MoralisProvider } from "react-moralis";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <MoralisProvider
+      serverUrl="https://bi4uak1fq34x.usemoralis.com:2053/server"
+      appId="HQ3fVf8n1b9hm771idklsSY8oAjPknNmEyG1fD1b"
+    >
+      <App />
+    </MoralisProvider>
   </Provider>,
   document.getElementById("root")
 );
