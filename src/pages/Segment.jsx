@@ -118,21 +118,10 @@ const Segment = () => {
   const handleFetchGQL = async (segmentQuery) => {
     try {
       if (segmentQuery.length > 1) {
-        console.log(
-          "segmentQuery[0].contract_address",
-          segmentQuery[0].contract_address
-        );
-        console.log(
-          "segmentQuery[1].contract_address",
-          segmentQuery[1].contract_address
-        );
         const [walletAddresses1, walletAddresses2] = await Promise.all([
           fetchWalletsBasedOnContract(segmentQuery[0].contract_address),
           fetchWalletsBasedOnContract(segmentQuery[1].contract_address),
         ]);
-
-        console.log("walletAddresses1", walletAddresses1);
-        console.log("walletAddresses2", walletAddresses2);
 
         const uniqueWallets = walletAddresses1.filter((value) =>
           walletAddresses2.includes(value)
@@ -160,9 +149,7 @@ const Segment = () => {
         { query: payload }
       );
 
-      // console.log("res: ", data?.data?.data?.tokens);
       const wallets = data?.data?.data?.tokens.map((token) => token.owner.id);
-      console.log("wallets", wallets);
 
       return wallets;
     } catch (err) {
@@ -189,14 +176,7 @@ const Segment = () => {
 
   const handleSubmit = () => {
     dispatch(saveSegment(segmentQuery));
-    console.log(
-      "segmentQuery[0].contract_address",
-      segmentQuery[0].contract_address
-    );
-    console.log(
-      "segmentQuery[1].contract_address",
-      segmentQuery[1]?.contract_address
-    );
+
     handleFetchGQL(segmentQuery);
   };
 

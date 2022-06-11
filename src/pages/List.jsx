@@ -19,7 +19,7 @@ const StyledContainer = styled.div`
 
     span:first-child {
       justify-self: start;
-      color: #B1B1B1;
+      color: #b1b1b1;
       font-weight: 700;
     }
 
@@ -28,13 +28,13 @@ const StyledContainer = styled.div`
     }
 
     &:hover {
-      background-color:rgba(255, 255, 255, 0.7);
+      background-color: rgba(255, 255, 255, 0.7);
       border-radius: 6px;
     }
   }
-`
+`;
 
-const List = ({tokens}) => {
+const List = ({ tokens }) => {
   return (
     <StyledContainer>
       {tokens?.map((token, index) => (
@@ -45,6 +45,6 @@ const List = ({tokens}) => {
       ))}
     </StyledContainer>
   );
-}
+};
 
 export default List;
