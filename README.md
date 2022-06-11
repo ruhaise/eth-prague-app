@@ -49,6 +49,5 @@ Now you will be asked for some details:
 - Specify Moralis Api Secret (secret info)
 - What server do you want to connect to? (0)
 
-BOOM - DEPLOYED!
+BOOOM - DEPLOYED!
 Visit `https://bi4uak1fq34x.usemoralis.com` to see the website
- 
