@@ -8,6 +8,7 @@ import Blockchain from "../assets/images/Blockchain.png";
 import Vector from "../assets/images/Vector.png";
 import { Button, TextField } from "@material-ui/core";
 //import ResHanlder from "./ResHanlder";
+import { useMoralisCloudFunction } from "react-moralis";
 
 const demoSegmentWallets = [
   "0xfdE2b5B1eB59A58e168736c6EF68b9bA7b4e0C13",
@@ -92,24 +93,14 @@ const Messaging = () => {
   const [apiKey, setApiKey] = useState("");
   const [statusCode, setStatusCode] = useState("");
 
-  const handleSendingMessage = async () => {
-    try {
-      const responseData = await axios.post(
-        `http://localhost:4000/sendchat`,
+  const { fetch } = useMoralisCloudFunction("helloWorld", { apiKey, msg });
 
-        {
-          data: {
-            addresses: demoSegmentWallets,
-            // apiKey: "tnEwufdqXBabbMfJfur4tbx2VYFsL2NIAR2ChT2hBykTtBm28IYHhD",
-            apiKey: apiKey,
-            message: msg,
-          },
-        }
-      );
-      console.log("response data", responseData);
-    } catch (err) {
-      console.error("Error Sending Message ", err);
-    }
+  const cloudCall = () => {
+    console.log("apiKey", apiKey);
+    console.log("msg", msg);
+    fetch({
+      onSuccess: (data) => console.log(data),
+    });
   };
 
   return (
@@ -154,7 +145,7 @@ const Messaging = () => {
           />
           <StyledButtonWrapper>
             <Button
-              onClick={() => handleSendingMessage()}
+              onClick={cloudCall}
               color="primary"
               variant="contained"
               size="large"
