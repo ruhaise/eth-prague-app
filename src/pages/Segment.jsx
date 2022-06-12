@@ -5,14 +5,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { saveSegment, setGraphTokens } from "../redux/segment/actions";
 import List from "./List";
-
-const demoSegmentWallets = [
-  "0xfdE2b5B1eB59A58e168736c6EF68b9bA7b4e0C13",
-  "0x2Ab135c81793Fa686bAA60361B3352dE9b251Cc6",
-  "0x330D7Ac5f24dC3570c2afe3F3a57D9C66e0795e8",
-  "0xC89f29B1b0dAC3B1ffEb29c648be74D4E559C97D",
-  "0x330D7Ac5f24dC3570c2afe3F3a57D9C66e0795e8",
-];
+import Messaging from "../components/Messaging";
 
 const StyledWrapper = styled.div`
   background: #f0f0f0;
@@ -22,7 +15,8 @@ const StyledWrapper = styled.div`
 
 const StyledInputsWrapper = styled.div`
   margin: auto;
-  max-width: 500px;
+  max-width: 700px;
+  width: 90%;
   display: flex;
   margin-bottom: 15px;
 
@@ -83,11 +77,11 @@ const StyledInputsoutWrapp = styled.div`
 
 const StyledButtonsWrapper = styled.div`
   margin: auto;
-  max-width: 500px;
+  max-width: 700px;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
 `;
 
 const StyledLeftContainer = styled.div`
@@ -188,33 +182,6 @@ const Segment = () => {
     handleFetchGQL(segmentQuery);
   };
 
-  const handleSendingMessage = async () => {
-    try {
-      const data = new FormData();
-      data.append("method", "sendchat");
-      data.append(
-        "apikey",
-        "tnEwufdqXBabbMfJfur4tbx2VYFsL2NIAR2ChT2hBykTtBm28IYHhD"
-      );
-      data.append("to", "0xC89f29B1b0dAC3B1ffEb29c648be74D4E559C97D");
-      data.append("msg", "This is a from frontend");
-
-      const responseData = await axios.post(
-        `http://localhost:4000/sendchat`,
-
-        {
-          data: {
-            addresses: demoSegmentWallets,
-            apiKey: "tnEwufdqXBabbMfJfur4tbx2VYFsL2NIAR2ChT2hBykTtBm28IYHhD",
-            message: "Hey this is another test from frontend",
-          },
-        }
-      );
-    } catch (err) {
-      console.error("Error Sending Message ", err);
-    }
-  };
-
   return (
     <StyledWrapper>
       <StyledLeftContainer>
@@ -283,6 +250,7 @@ const Segment = () => {
         </StyledButtonsWrapper>
         {tokens?.length ? <StyledBR /> : null}
         <List tokens={tokens} />
+        <Messaging />
       </StyledRightContainer>
     </StyledWrapper>
   );
