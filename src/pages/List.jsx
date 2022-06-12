@@ -7,7 +7,12 @@ const StyledContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   justify-content: flex-start;
-
+  justify-content: space-evenly;
+  background-color: #fff;
+  width: 80%;
+  margin: auto;
+  max-height: 60vh;
+  overflow: scroll;
   div {
     display: grid;
     font-size: 20px;
@@ -39,8 +44,8 @@ const List = ({ tokens }) => {
     <StyledContainer>
       {tokens?.map((token, index) => (
         <div key={token}>
-          <span>{index}</span>
-          <span>{token}</span>
+          <div>{index}</div>
+          <div>{token}</div>
         </div>
       ))}
     </StyledContainer>
